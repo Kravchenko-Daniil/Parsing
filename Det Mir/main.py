@@ -40,7 +40,7 @@ def get_source_html(url):
             action = ActionChains(driver)
             action.move_to_element(btn_show_more)
             btn_show_more.click()
-            time.sleep(3)
+            time.sleep(1)
 
         with open("Components/Pages/source-page.html", "w", encoding="utf-8") as file:
             file.write(driver.page_source)
@@ -69,9 +69,9 @@ def get_items_urls(file_path):
         item_url = item.find('div', class_='vY').find('a').get('href')
         urls.append(item_url)
 
-    # with open("Components/Result files/urls.txt", "w") as file:
-    #     for url in urls:
-    #         file.write(f"{url}\n")
+    with open("Components/Result files/urls.txt", "w") as file:
+        for url in urls:
+            file.write(f"{url}\n")
 
     return urls
 
@@ -143,9 +143,9 @@ def get_items_prices_default(file_path):
             price_default = 'Товара нет в наличии'
         prices_default.append(price_default)
 
-    with open("Components/Result files/prices_default.txt", 'w', encoding="utf-8") as file:
-        for price in prices_default:
-            file.write(f"{price}\n")
+    # with open("Components/Result files/prices_default.txt", 'w', encoding="utf-8") as file:
+    #     for price in prices_default:
+    #         file.write(f"{price}\n")
 
     return prices_default
 
@@ -196,7 +196,7 @@ def create_csv_results(ids, names, prices, prices_promo, urls):
 
 
 def main():
-    # print(get_source_html(url=URL))
+    print(get_source_html(url=URL))
     urls = get_items_urls(file_path="Components/Pages/source-page.html")
     ids = get_items_id(file_path="Components/Result files/urls.txt")
     names = get_items_names(file_path="Components/Pages/source-page.html")
