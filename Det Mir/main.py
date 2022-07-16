@@ -1,11 +1,11 @@
 import time
-import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from re import *
+import lxml
 import csv
 
 
@@ -42,8 +42,8 @@ def get_source_html(url):
             btn_show_more.click()
             time.sleep(3)
 
-        with open("Components/Pages/source-page.html", "w") as file:
-            file.write(driver.page_source)    
+        with open("Components/Pages/source-page.html", "w", encoding="utf-8") as file:
+            file.write(driver.page_source)
 
         return ">>>Source html received successfully!<<<"
 
@@ -194,8 +194,9 @@ def create_csv_results(ids, names, prices, prices_promo, urls):
 
     return "All complete!"
 
+
 def main():
-    print(get_source_html(url=URL))
+    # print(get_source_html(url=URL))
     urls = get_items_urls(file_path="Components/Pages/source-page.html")
     ids = get_items_id(file_path="Components/Result files/urls.txt")
     names = get_items_names(file_path="Components/Pages/source-page.html")
