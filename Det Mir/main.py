@@ -12,6 +12,7 @@ import csv
 # Я реализовал данный парсер не универсальным и быстрым, так как пришлось использовать selenium webdriver.
 # Сделал я это, потому что сайт https://www.detmir.ru/ не хотел выдавать данные по другому
 
+# Ссылка для установки Google Chrome 104.0.5112.48 https://www.google.ru/intl/ru/chrome/beta/
 
 URL = 'https://www.detmir.ru/catalog/index/name/lego/'
 url1 = "https://api.detmir.ru/v2/recommendation/products?filter=category.id:40;placement:web_listing_popular;region.iso:RU-MOW&limit=30"
@@ -24,6 +25,7 @@ def get_source_html(url):
     # Этот путь находится в проекте, поэтому он будет работать на любом компьютере
 
     options = webdriver.ChromeOptions()
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
     options.binary_location = "C:\Program Files\Google\Chrome Beta\Application\chrome.exe"
     # А этот путь будет работать на любом Windows компьютере, на котором установлен Chrome Browser (версия 104.0.5112.48)
 
@@ -39,6 +41,9 @@ def get_source_html(url):
             action.move_to_element(btn_show_more)
             btn_show_more.click()
             time.sleep(3)
+
+        with open("Components/Pages/source-page.html", "w") as file:
+            file.write(driver.page_source)    
 
         return ">>>Source html received successfully!<<<"
 
@@ -187,6 +192,7 @@ def create_csv_results(ids, names, prices, prices_promo, urls):
     for list in zip_lists:
         csv_file.writerow(list)
 
+    return "All complete!"
 
 def main():
     print(get_source_html(url=URL))
@@ -195,13 +201,8 @@ def main():
     names = get_items_names(file_path="Components/Pages/source-page.html")
     prices = get_items_prices_default(file_path="Components/Pages/source-page.html")
     prices_promo = get_items_prices_promo(file_path="Components/Pages/source-page.html")
-    create_csv_results(ids, names, prices, prices_promo, urls)
+    print(create_csv_results(ids, names, prices, prices_promo, urls))
 
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
