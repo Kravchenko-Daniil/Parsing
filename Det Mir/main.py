@@ -9,7 +9,7 @@ from re import *
 import csv
 
 
-# Я реализовал данный парсер не универсальным, так как пришлось использовать selenium webdriver.
+# Я реализовал данный парсер не универсальным и быстрым, так как пришлось использовать selenium webdriver.
 # Сделал я это, потому что сайт https://www.detmir.ru/ не хотел выдавать данные по другому
 
 
@@ -190,12 +190,12 @@ def create_csv_results(ids, names, prices, prices_promo, urls):
 
 def main():
     print(get_source_html(url=URL))
-    # urls = get_items_urls(file_path="Components/Pages/source-page.html")
-    # ids = get_items_id(file_path="Components/Result files/urls.txt")
-    # names = get_items_names(file_path="Components/Pages/source-page.html")
-    # prices = get_items_prices_default(file_path="Components/Pages/source-page.html")
-    # prices_promo = get_items_prices_promo(file_path="Components/Pages/source-page.html")
-    # create_csv_results(ids, names, prices, prices_promo, urls)
+    urls = get_items_urls(file_path="Components/Pages/source-page.html")
+    ids = get_items_id(file_path="Components/Result files/urls.txt")
+    names = get_items_names(file_path="Components/Pages/source-page.html")
+    prices = get_items_prices_default(file_path="Components/Pages/source-page.html")
+    prices_promo = get_items_prices_promo(file_path="Components/Pages/source-page.html")
+    create_csv_results(ids, names, prices, prices_promo, urls)
 
 
 if __name__ == "__main__":
