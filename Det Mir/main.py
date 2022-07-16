@@ -20,12 +20,13 @@ url1 = "https://api.detmir.ru/v2/recommendation/products?filter=category.id:40;p
 def get_source_html(url):
     # Функция для получения изначального HTML кода нужной страницы сайта
 
-    # Первый путь находинся в проектк и поэтому он будет работать на любом компьютере
-    # А второй путь будет работать на любом Windows компьютере, на котором установлен Chrome Browser (версия 104.0.5112.48)
-
     service = Service("Components/chromedriver_win32/chromedriver.exe")
+    # Этот путь находится в проекте, поэтому он будет работать на любом компьютере
+
     options = webdriver.ChromeOptions()
     options.binary_location = "C:\Program Files\Google\Chrome Beta\Application\chrome.exe"
+    # А этот путь будет работать на любом Windows компьютере, на котором установлен Chrome Browser (версия 104.0.5112.48)
+
     driver = webdriver.Chrome(service=service, options=options)
 
     try:
