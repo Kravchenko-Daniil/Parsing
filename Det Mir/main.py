@@ -20,8 +20,8 @@ url1 = "https://api.detmir.ru/v2/recommendation/products?filter=category.id:40;p
 def get_source_html(url):
     # Функция для получения изначального HTML кода нужной страницы сайта
 
-    # Первый путь находинся в проектк и поэтому он будет работать
-    # А второй путь будет работать на любом Windows компьютере, на котором установлен Chrome Browser, только могут не совпадать версии (версия Chrome: 104.0.5112.48)
+    # Первый путь находинся в проектк и поэтому он будет работать на любом компьютере
+    # А второй путь будет работать на любом Windows компьютере, на котором установлен Chrome Browser (версия 104.0.5112.48)
 
     service = Service("Components/chromedriver_win32/chromedriver.exe")
     options = webdriver.ChromeOptions()
